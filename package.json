@@ -1,0 +1,22 @@
+{
+  "name": "zkevm-plena",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ zkevm-plena",
+    "create-local": "graph create --node http://localhost:8020/ zkevm-plena",
+    "remove-local": "graph remove --node http://localhost:8020/ zkevm-plena",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 zkevm-plena",
+    "test": "graph test",
+    "auth": "graph auth --studio 5dc13aa532e7a08b6ddaac92efb9b45d",
+    "deploy:zkevm": "graph codegen && graph build && graph deploy --studio zkevm-v2"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "^0.56.0",
+    "@graphprotocol/graph-ts": "0.30.0"
+  },
+  "devDependencies": {
+    "matchstick-as": "0.5.0"
+  }
+}

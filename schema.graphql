@@ -1,0 +1,265 @@
+type Created @entity {
+  id: ID!
+  wallet: Bytes # address
+}
+
+type SwapTransaction @entity {
+  id: ID!
+  buyToken: Bytes! # address
+  sellToken: Bytes! # address
+  sellAmt: BigInt!
+  buyAmt: BigInt!
+  wallet: String!
+  transactionHash: String!
+  fee: BigInt!
+  timestamp: BigInt!
+}
+
+type LifiBridge @entity {
+  id: ID!
+  from: Bytes! # address
+  to: Bytes! # address
+  fromToken: Bytes! # address
+  toToken: Bytes! # address
+  amount: BigInt! # uint256
+  fee: BigInt! # uint256
+  feeRecipient: Bytes! # address
+  timestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type WithdrawAnyToken @entity {
+  id: ID!
+  token: Bytes! # address
+  amount: BigInt! # address
+  fee: BigInt!
+  wallet: String!
+  transactionHash: String!
+  timestamp: BigInt!
+}
+
+type TransferNFT @entity {
+  id: ID!
+  token: Bytes! # address
+  from: Bytes! # address
+  to: Bytes!
+  wallet: String!
+  transactionHash: String!
+  timestamp: BigInt!
+  nftType: BigInt!
+  nftId: BigInt!
+  feeToken: Bytes!
+  fee: BigInt!
+}
+
+type Transfer @entity {
+  id: ID!
+  recipient: Bytes!
+  tokenAmt: BigInt!
+  wallet: String!
+  transactionHash: String!
+  fee: BigInt!
+  timestamp: BigInt!
+  erc20: Bytes
+}
+
+type TransferInChat @entity {
+  id: ID!
+  recipient: Bytes!
+  tokenAmt: BigInt!
+  wallet: String!
+  transactionHash: String!
+  fee: BigInt!
+  timestamp: BigInt!
+  erc20: Bytes
+  tokenName: String
+  decimals: BigInt
+}
+
+type Supply @entity {
+  id: ID!
+  erc20: Bytes!
+  tokenAmt: BigInt!
+  wallet: String!
+  transactionHash: String!
+  fee: BigInt!
+  timestamp: BigInt!
+}
+
+type Withdraw @entity {
+  id: ID!
+  erc20: Bytes!
+  tokenAmt: BigInt!
+  wallet: String!
+  transactionHash: String!
+  fee: BigInt!
+  timestamp: BigInt!
+}
+
+type ClaimMaticTransaction @entity {
+  id: ID!
+  amount: BigInt!
+  wallet: String!
+  transactionHash: String!
+  fee: BigInt!
+  timestamp: BigInt!
+}
+
+type ClaimTransaction @entity {
+  id: ID!
+  erc20: Bytes!
+  amount: BigInt!
+  wallet: String!
+  transactionHash: String!
+  fee: BigInt!
+  timestamp: BigInt!
+}
+
+type Stake @entity {
+  id: ID!
+  erc20: Bytes!
+  amount: BigInt!
+  wallet: String!
+  transactionHash: String!
+  fee: BigInt!
+  timestamp: BigInt!
+}
+
+type UnStake @entity {
+  id: ID!
+  erc20: Bytes!
+  amount: BigInt!
+  wallet: String!
+  transactionHash: String!
+  fee: BigInt!
+  timestamp: BigInt!
+}
+
+type ZapIn @entity {
+  id: ID!
+  fromToken: Bytes!
+  pairAddress: Bytes!
+  lpBought: BigInt!
+  wallet: String!
+  transactionHash: String!
+  fee: BigInt!
+  timestamp: BigInt!
+  fromTokenAmount: BigInt
+}
+
+type ZapOut @entity {
+  id: ID!
+  fromPoolAddress: Bytes!
+  toTokenAddress: Bytes!
+  incomingLP: BigInt!
+  wallet: String!
+  transactionHash: String!
+  fee: BigInt!
+  timestamp: BigInt!
+  totalTokensRec: BigInt!
+}
+
+type ZapOutPair @entity {
+  id: ID!
+  fromPoolAddress: Bytes!
+  incomingLP: BigInt!
+  amount0: BigInt!
+  amount1: BigInt!
+  wallet: String!
+  transactionHash: String!
+  fee: BigInt!
+  timestamp: BigInt!
+  feeTokenAddress: Bytes!
+}
+
+type BrigeTransaction @entity {
+  id: ID!
+  wallet: String!
+  transactionHash: String!
+  fee: BigInt!
+  timestamp: BigInt!
+  erc20: Bytes!
+  anyToken: Bytes!
+  to: Bytes!
+  tokenAmt: BigInt!
+  toChainID: BigInt!
+}
+
+type BetPrediction @entity {
+  id: ID!
+  epoch: BigInt! # address
+  amount: BigInt! # uint256
+  timestamp: BigInt!
+  user: Bytes!
+  token: Bytes!
+  direction: Boolean!
+  fee: BigInt!
+  transactionHash: String!
+  predictionContract: Bytes
+}
+
+type ClaimBetReward @entity {
+  id: ID!
+  user: Bytes!
+  epochs: [BigInt!] # uint256
+  reward: BigInt! # uint256
+  timestamp: BigInt!
+  fee: BigInt!
+  token: Bytes!
+  transactionHash: String!
+  predictionContract: Bytes
+}
+
+type Deposit @entity(immutable: true) {
+  id: ID!
+  dToken: Bytes! # address
+  folio: Bytes! # address
+  amount: BigInt! # uint256
+  tokens: [Bytes!]! # address[]
+  weights: [BigInt!]! # uint256[]
+  tokensBought: [BigInt!]! # uint256[]
+  fee: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PlenaConnectTxnWithVal @entity(immutable: true) {
+  id: ID!
+  targets: [Bytes!]! # address[]
+  wallet: Bytes! # address
+  values: [BigInt!]! # uint256[]
+  erc20: Bytes! # address
+  fee: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Transaction @entity {
+  id: ID!
+  wallet: String!
+  transactionHash: String!
+  timestamp: BigInt!
+  transferEvent: String!
+  swap: SwapTransaction
+  transfer: Transfer
+  withdraw: Withdraw
+  supplied: Supply
+  claimMatic: ClaimMaticTransaction
+  claim: ClaimTransaction
+  stake: Stake
+  unstake: UnStake
+  zapIn: ZapIn
+  zapOut: ZapOut
+  zapOutPair: ZapOutPair
+  bridge: BrigeTransaction
+  withdrawAnyToken: WithdrawAnyToken
+  transferNFT: TransferNFT
+  tranferInChat: TransferInChat
+  bet: BetPrediction
+  claimBetReward: ClaimBetReward
+  portfolioDeposit: Deposit
+  lifiBridge: LifiBridge
+  plenaConnect: PlenaConnectTxnWithVal
+}
